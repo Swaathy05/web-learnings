@@ -1,0 +1,176 @@
+/* Universal reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body styling */
+body {
+    background: rgb(187, 223, 255);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 1rem;
+    font-family: sans-serif;
+}
+
+/* Container */
+.container {
+    background-color: aliceblue;
+    border-radius: 1rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 600px;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Screens */
+.screen {
+    padding: 2rem;
+    display: none; /* hide all screens by default */
+    text-align: center;
+}
+.screen-active {
+    display: block; /* show active screen */
+}
+
+/* Start screen */
+#start-screen h1 {
+    color: rgb(9, 91, 255);
+    margin-bottom: 20px;
+    font-size: 2.5rem;
+}
+#start-screen p {
+    font-size: 1.1rem;
+    margin-bottom: 30px;
+    color: rgb(40, 27, 27);
+}
+
+/* Quiz header */
+.quiz-header {
+    margin-bottom: 2rem;
+}
+#question {
+    margin-bottom: 1rem;
+    color: black;
+    font-size: 1.5rem;
+    line-height: 1.4;
+}
+.quiz-info {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    color: rgb(17, 6, 6);
+}
+
+/* Answers */
+.answers-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 25px;
+}
+.answer-btn {
+    background-color: aqua;
+    color: black;
+    border: 2px solid rgb(150, 143, 143);
+    border-radius: 10px;
+    padding: 10px;
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.3s ease;
+}
+.answer-btn:hover {
+    background-color: rgb(204, 255, 255);
+    border-color: rgb(202, 180, 151);
+}
+.answer-btn.correct {
+    background-color: lightgreen;
+    border-color: green;
+    color: white;
+}
+.answer-btn.incorrect {
+    background-color: lightcoral;
+    border-color: darkred;
+    color: white;
+}
+
+/* Progress bar */
+.progress-bar {
+    height: 20px;
+    background-color: rgb(200, 200, 200);
+    border-radius: 5px;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+.progress {
+    height: 100%;
+    width: 0%;
+    background-color: rgb(0, 25, 253);
+    transition: width 0.3s ease;
+}
+
+/* Result screen */
+#result-screen h1 {
+    color: blue;
+    margin-bottom: 30px;
+    font-size: 2.5rem;
+}
+.result-info {
+    background-color: azure;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 30px;
+}
+.result-info p {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    color: rgb(42, 37, 37);
+}
+#result-message {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: rgb(12, 7, 7);
+}
+
+/* Buttons */
+button {
+    background-color: rgb(0, 124, 143);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 15px 30px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+button:hover {
+    background-color: rgb(88, 152, 255);
+}
+/*responsive design*/
+@media (max-width: 500px) {
+    /*when we hit 500px and below, implement these styles below*/
+
+    .screen {
+        padding: 1rem;
+    }
+    #start-screen h1{
+        font-size: 2rem;
+    }
+    #question{
+        font-size: 1.3rem;
+    }
+    .answer-btn {
+       
+        padding: 12px;
+    }
+    button{
+        padding: 12px 25px;
+        font-size: 1rem;
+    }
+
+
+}
