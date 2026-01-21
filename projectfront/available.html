@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Available Courses</title>
+
+    <!-- ===== INTERNAL CSS ===== -->
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: linear-gradient(120deg, #f0f4f8, #d9e2ec);
+            padding: 40px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            letter-spacing: 1px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: auto;
+        }
+
+        button {
+            display: block;
+            margin: 0 auto 30px;
+            padding: 12px 24px;
+            font-size: 16px;
+            border: none;
+            border-radius: 6px;
+            background-color: #2f80ed;
+            color: white;
+            cursor: pointer;
+        }
+
+        button:disabled {
+            background-color: #999;
+            cursor: not-allowed;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            display: none;
+        }
+
+        th, td {
+            padding: 14px 16px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #1f2933;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f8fafc;
+        }
+
+        .status {
+            text-align: center;
+            margin-top: 15px;
+            font-weight: 500;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>AVAILABLE COURSES</h1>
+
+        <button id="loadBtn">SEE COURSES</button>
+
+        <table id="courseTable">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Course Name</th>
+                    <th>Instructor</th>
+                    <th>Duration</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+
+        <div class="status" id="status"></div>
+    </div>
+
+    <!-- ===== INTERNAL JS ===== -->
+    <script>
+        const button = document.getElementById("loadBtn");
+        const table = document.getElementById("courseTable");
+        const tbody = table.querySelector("tbody");
+        const status = document.getElementById("status");
+
+        button.addEventListener("click", loadCourses);
+
+        function loadCourses() {
+            button.disabled = true;
+            status.textContent = "Loading courses...";
+
+            fetch("http://localhost:8080/courses")
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error("Server error");
+                    }
+                    return response.json();
+                })
+                .then(courses => {
+                    tbody.innerHTML = "";
+
+                    if (courses.length === 0) {
+                        status.textContent = "No courses available.";
+                        return;
+                    }
+
+                    courses.forEach(course => {
+                        const row = document.createElement("tr");
+                        row.innerHTML = `
+                        <td>${course.courseId}</td>
+                        <td>${course.courseName}</td>
+                        <td>${course.trainer}</td>
+                        <td>${course.durationInWeeks}</td>
+                        `;
+
+                        tbody.appendChild(row);
+                    });
+
+                    table.style.display = "table";
+                    status.textContent = "";
+                })
+                .catch(err => {
+                    status.textContent = "Failed to load courses.";
+                })
+                .finally(() => {
+                    button.disabled = false;
+                });
+        }
+    </script>
+
+</body>
+</html>
