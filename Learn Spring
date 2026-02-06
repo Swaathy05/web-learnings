@@ -1,0 +1,36 @@
+Spring Boot:
+Java framework for backend development.
+
+Why Spring Boot:
+- Easy setup
+- Embedded server
+- Fast development
+
+Request Flow:
+Client -> Controller -> Service -> Repository -> Database
+
+REST API:
+Used for communication between client and server.
+
+HTTP Methods:
+GET -> Fetch data
+POST -> Create data
+PUT -> Update data
+DELETE -> Delete data
+
+Data format: JSON
+
+Spring Boot Structure:
+
+src/main/java -> Java code
+src/main/resources -> Config files
+pom.xml -> Dependencies
+
+Main class:
+Contains @SpringBootApplication
+
+Packages:
+controller
+service
+repository
+model
